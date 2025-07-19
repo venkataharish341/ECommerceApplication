@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: assignment
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+
+  h2:
+    console:
+      enabled: true
+
+  cache:
+    type: caffeine
+    caffeine:
+      spec: expireAfterWrite=10m,maximumSize=1000
+    cache-names: products
+
+logging:
+  level:
+    org.springframework.web.servlet.resource: error
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,caches
+  endpoint:
+    caches:
+      enabled: true
